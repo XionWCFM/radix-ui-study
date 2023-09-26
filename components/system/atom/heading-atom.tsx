@@ -1,6 +1,4 @@
-// Heading 컴포넌트는 SEO를 위해 H태그를 사용합니다.
-// 이에 따라
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithRef, Ref } from "react";
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/util/cn";
 const HeadingVariants = cva(``, {
@@ -28,26 +26,30 @@ const HeadingVariants = cva(``, {
 });
 
 interface HeadingAtomProps
-  extends ComponentPropsWithoutRef<"h2">,
+  extends ComponentPropsWithRef<"h2">,
     VariantProps<typeof HeadingVariants> {
   h?: 1 | 2 | 3 | 4 | 5 | 6;
   className?: string;
 }
 
-const HeadingAtom = ({
-  h = 2,
-  children,
-  variant,
-  className,
-  fontWeight,
-  ...attributes
-}: HeadingAtomProps) => {
+const HeadingAtom = (
+  {
+    h = 2,
+    children,
+    variant,
+    className,
+    fontWeight,
+    ...attributes
+  }: HeadingAtomProps,
+  ref: Ref<HTMLHeadingElement>,
+) => {
   switch (h) {
     case 1: {
       return (
         <h1
           className={cn(HeadingVariants({ variant, fontWeight }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h1>
@@ -58,6 +60,7 @@ const HeadingAtom = ({
         <h1
           className={cn(HeadingVariants({ variant, fontWeight }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h1>
@@ -68,6 +71,7 @@ const HeadingAtom = ({
         <h2
           className={cn(HeadingVariants({ variant, fontWeight }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h2>
@@ -78,6 +82,7 @@ const HeadingAtom = ({
         <h3
           className={cn(HeadingVariants({ variant, fontWeight }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h3>
@@ -98,6 +103,7 @@ const HeadingAtom = ({
         <h5
           className={cn(HeadingVariants({ variant, fontWeight }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h5>
@@ -108,6 +114,7 @@ const HeadingAtom = ({
         <h6
           className={cn(HeadingVariants({ variant }), className)}
           {...attributes}
+          ref={ref}
         >
           {children}
         </h6>
@@ -118,4 +125,4 @@ const HeadingAtom = ({
   }
 };
 
-export default HeadingAtom;
+export default React.forwardRef(HeadingAtom);

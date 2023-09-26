@@ -85,4 +85,4 @@ const TextAtom = (
   }
 };
 
-export default TextAtom;
+export default React.forwardRef(TextAtom);

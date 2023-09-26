@@ -4,7 +4,7 @@ import React, { ComponentPropsWithRef, Ref } from "react";
 
 const ButtonVariants = cva(
   `
- duration-200 transition-all py-4 rounded-[1.25rem]
+ duration-200  px-4 transition-all py-2 rounded-[0.75rem]
 `,
   {
     variants: {

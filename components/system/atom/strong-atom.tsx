@@ -1,6 +1,6 @@
 import { VariantProps, cva } from "class-variance-authority";
 import { cn } from "@/util/cn";
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithoutRef, Ref } from "react";
 
 const StrongVariants = cva(``, {
   variants: {
@@ -21,12 +21,15 @@ interface StrongAtomProps
   className?: string;
 }
 
-const StrongAtom = ({ children, className, variant }: StrongAtomProps) => {
+const StrongAtom = (
+  { children, className, variant }: StrongAtomProps,
+  ref: Ref<HTMLElement>,
+) => {
   return (
-    <strong className={cn(StrongVariants({ variant }), className)}>
+    <strong ref={ref} className={cn(StrongVariants({ variant }), className)}>
       {children}
     </strong>
   );
 };
 
-export default StrongAtom;
+export default React.forwardRef(StrongAtom);
