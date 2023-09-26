@@ -62,7 +62,7 @@ const SliderAtom = () => {
           </Slider.Range>
         </Slider.Track>
         <Slider.Thumb
-          className=" block w-[55px] h-[55px] rounded-full"
+          className=" block w-[55px] h-[55px] rounded-full focus:outline-none"
           aria-label="Volume"
         >
           <div className=" flex justify-center items-center bg-primary-100 h-full rounded-r-full">
