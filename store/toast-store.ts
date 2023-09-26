@@ -5,12 +5,13 @@ export type ToastProp = "default" | "success" | "error";
 
 export type ToastState = {
   id: number;
+  title?: string;
   content: string;
   visible?: boolean;
   type?: ToastProp;
 };
 
-export type ToastArgument = Pick<ToastState, "content" | "type">;
+export type ToastArgument = Pick<ToastState, "title" | "content" | "type">;
 
 export type ToastStoreState = {
   toastList: ToastState[];
@@ -19,12 +20,12 @@ export type ToastStoreState = {
 export type ToastAction = {
   addToast: (toastContent: ToastArgument) => void;
   deleteToast: (toastContent: ToastState) => void;
-  shiftToast: () => void;
 };
 
 const toastCreator = (toast: ToastArgument) => {
   const toastObject: ToastState = {
     id: Number(new Date()),
+    title: toast.title ?? undefined,
     content: toast.content,
     type: toast.type ?? "default",
     visible: true,
@@ -50,17 +51,10 @@ const useToastStore = create<ToastStoreState & ToastAction>()(
         ),
       }));
     },
-    shiftToast: () => {
-      set((state) => ({
-        toastList: state.toastList.slice(1),
-      }));
-    },
   })),
 );
 
 export const useToastState = () => useToastStore((state) => state.toastList);
 export const useAddToastAction = () => useToastStore((state) => state.addToast);
-export const useShiftToastAction = () =>
-  useToastStore((state) => state.shiftToast);
 export const useDeleteToastAction = () =>
   useToastStore((state) => state.deleteToast);
