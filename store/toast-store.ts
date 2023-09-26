@@ -39,6 +39,11 @@ const useToastStore = create<ToastStoreState & ToastAction>()(
     addToast: (toastContent) => {
       set((state) => {
         const toastObject = toastCreator(toastContent);
+        if (state.toastList.length > 0) {
+          return {
+            toastList: [...state.toastList],
+          };
+        }
         return {
           toastList: [...state.toastList, toastObject],
         };

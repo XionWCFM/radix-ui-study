@@ -1,9 +1,9 @@
-import React from "react";
+import { ToastArgument, useAddToastAction } from "@/store/toast-store";
 
-interface useToastProps {}
-
-const useToast = ({}: useToastProps) => {
-  return <div>useToast</div>;
+const useToast = () => {
+  const addToast = useAddToastAction();
+  const toast = (toastObject: ToastArgument) => addToast(toastObject);
+  return toast;
 };
 
 export default useToast;

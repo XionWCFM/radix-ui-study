@@ -19,7 +19,7 @@ const Toast = ({ title, type, content, id, visible }: ToastProps) => {
     >
       <motion.div
         className={`w-[100px] h-[100px] bg-primary-100`}
-        exit={{ y: [0, 100] }}
+        exit={{ y: [0, 100], opacity: 0 }}
         key={id}
         initial={{
           y: 0,

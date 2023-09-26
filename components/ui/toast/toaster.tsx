@@ -1,15 +1,13 @@
 "use client";
 import * as ToastPrimitive from "@radix-ui/react-toast";
-import React, { useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { getArea } from "@/util/get-area";
-import { useDeleteToastAction, useToastState } from "@/store/toast-store";
+import React from "react";
+import { AnimatePresence } from "framer-motion";
+import { useToastState } from "@/store/toast-store";
 import Toast from "./toast";
 interface ToasterProps {}
 
 const Toaster = ({}: ToasterProps) => {
   const toastState = useToastState();
-  const deleteToast = useDeleteToastAction();
   return (
     <ToastPrimitive.Provider swipeDirection="down" duration={1000}>
       <AnimatePresence>
