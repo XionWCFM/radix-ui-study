@@ -2,19 +2,18 @@
 import { useAddToastAction } from "@/store/toast-store";
 import React from "react";
 import ButtonAtom from "../system/atom/button-atom";
+import useToast from "@/hooks/ui-hooks/use-toast";
 
 interface DemoProps {}
 
 const Demo = ({}: DemoProps) => {
-  const addToast = useAddToastAction();
+  const toast = useToast();
 
   return (
     <div>
       <ButtonAtom
         onClick={() => {
-          addToast({
-            content: "엄준식은",
-          });
+          toast({ content: "dsads" });
         }}
       >
         눌러봐요
