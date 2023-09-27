@@ -1,3 +1,4 @@
+import DemoOffset from "@/components/demo";
 import Demo from "@/components/domain/Demo";
 import ButtonAtom from "@/components/system/atom/button-atom";
 import DialogAtom from "@/components/ui/dialog/dialog-atom";
@@ -16,6 +17,7 @@ export default function Home() {
       <Motion />
       <Toaster />
       <Demo />
+      <DemoOffset />
     </div>
   );
 }
