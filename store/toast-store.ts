@@ -34,29 +34,36 @@ const toastCreator = (toast: ToastArgument) => {
 };
 
 const useToastStore = create<ToastStoreState & ToastAction>()(
-  devtools((set) => ({
-    toastList: [],
-    addToast: (toastContent) => {
-      set((state) => {
-        const toastObject = toastCreator(toastContent);
-        if (state.toastList.length > 0) {
-          return {
-            toastList: [...state.toastList],
-          };
-        }
-        return {
-          toastList: [...state.toastList, toastObject],
-        };
-      });
-    },
-    deleteToast: (toastContent) => {
-      set((state) => ({
-        toastList: state.toastList.filter(
-          (item) => item.id !== toastContent.id,
-        ),
-      }));
-    },
-  })),
+  devtools(
+    persist(
+      (set) => ({
+        toastList: [],
+        addToast: (toastContent) => {
+          set((state) => {
+            const toastObject = toastCreator(toastContent);
+            if (state.toastList.length > 0) {
+              return {
+                toastList: [...state.toastList],
+              };
+            }
+            return {
+              toastList: [...state.toastList, toastObject],
+            };
+          });
+        },
+        deleteToast: (toastContent) => {
+          set((state) => ({
+            toastList: state.toastList.filter(
+              (item) => item.id !== toastContent.id,
+            ),
+          }));
+        },
+      }),
+      {
+        name: "toast",
+      },
+    ),
+  ),
 );
 
 export const useToastState = () => useToastStore((state) => state.toastList);
